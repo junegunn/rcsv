@@ -53,10 +53,10 @@ class Rcsv
     case options[:header]
     when :use
       header = self.raw_parse(StringIO.new(csv_data.each_line.first), raw_options).first
-      raw_options[:offset_rows] = options[:offset_rows] || 1
+      raw_options[:offset_rows] = corrected_offset_rows(options[:offset_rows])
     when :skip
       header = (0..(csv_data.each_line.first.split(raw_options[:col_sep]).count)).to_a
-      raw_options[:offset_rows] = options[:offset_rows] || 1
+      raw_options[:offset_rows] = corrected_offset_rows(options[:offset_rows])
     when :none
       header = (0..(csv_data.each_line.first.split(raw_options[:col_sep]).count)).to_a
     end
@@ -196,5 +196,13 @@ class Rcsv
     else
       field.to_s
     end
+  end
+
+  private
+
+  def self.corrected_offset_rows(offset_rows)
+    return 1 if offset_rows.nil? || offset_rows <= 0
+
+    offset_rows
   end
 end
