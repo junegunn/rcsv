@@ -48,8 +48,6 @@ class Rcsv
       raw_options[:output_encoding] = csv_data.external_encoding.to_s
     end
 
-    initial_position = csv_data.pos
-
     case options[:header]
     when :use
       header = self.raw_parse(StringIO.new(csv_data.each_line.first), raw_options).first
@@ -58,6 +56,7 @@ class Rcsv
       header = (0..(csv_data.each_line.first.split(raw_options[:col_sep]).count)).to_a
       raw_options[:offset_rows] = corrected_offset_rows(options[:offset_rows])
     when :none
+      initial_position = csv_data.pos
       header = (0..(csv_data.each_line.first.split(raw_options[:col_sep]).count)).to_a
     end
 
@@ -133,7 +132,7 @@ class Rcsv
       raw_options[:row_conversions] = row_conversions
     end
 
-    csv_data.pos = initial_position
+    csv_data.pos = initial_position if initial_position
     return self.raw_parse(csv_data, raw_options, &block)
   end
 
@@ -201,8 +200,8 @@ class Rcsv
   private
 
   def self.corrected_offset_rows(offset_rows)
-    return 1 if offset_rows.nil? || offset_rows <= 0
+    return 0 if offset_rows.nil? || offset_rows <= 0
 
-    offset_rows
+    offset_rows - 1
   end
 end
