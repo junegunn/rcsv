@@ -32,12 +32,12 @@ class RcsvParseTest < Test::Unit::TestCase
     )
 
     assert_equal({
-      'a' => '1',
-      'B' => 2,
-      'c' => '3',
-      'd' => 4,
-      'e' => '5',
-      'f' => 161226289488,
+      :a => '1',
+      :B => 2,
+      :c => '3',
+      :d => 4,
+      :e => '5',
+      :f => 161226289488,
     }, parsed_data.first)
   end
 
@@ -60,12 +60,12 @@ class RcsvParseTest < Test::Unit::TestCase
     )
 
     assert_equal({
-      'a' => '6',
-      'b' => 7,
-      'c' => '8',
-      'd' => 9,
-      'e' => '10',
-      'f' => 161226289488,
+      :a => '6',
+      :b => 7,
+      :c => '8',
+      :d => 9,
+      :e => '10',
+      :f => 161226289488,
     }, parsed_data.first)
   end
 
@@ -88,12 +88,12 @@ class RcsvParseTest < Test::Unit::TestCase
     )
 
     assert_equal({
-      'a' => '1',
-      'b' => 2,
-      'c' => '3',
-      'd' => 4,
-      'e' => '5',
-      'f' => 161226289488,
+      :a => '1',
+      :b => 2,
+      :c => '3',
+      :d => 4,
+      :e => '5',
+      :f => 161226289488,
     }, parsed_data.first)
   end
 
