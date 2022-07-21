@@ -74,7 +74,7 @@ class Rcsv
         column_options = options[:columns][column_header]
         if column_options
           if (options[:row_as_hash])
-            column_names << (column_options[:alias] || column_header).to_sym
+            column_names << (column_options[:alias] || column_header)
           end
 
           row_defaults << column_options[:default] || nil
@@ -118,7 +118,7 @@ class Rcsv
           except_rows << nil
           row_conversions << ' '
         else
-          column_names << column_header.to_sym
+          column_names << column_header
           row_defaults << nil
           only_rows << nil
           except_rows << nil
@@ -126,7 +126,7 @@ class Rcsv
         end
       end
 
-      raw_options[:column_names] = column_names if options[:row_as_hash]
+      raw_options[:column_names] = column_names.map(&:to_sym) if options[:row_as_hash]
       raw_options[:only_rows] = only_rows unless only_rows.compact.empty?
       raw_options[:except_rows] = except_rows unless except_rows.compact.empty?
       raw_options[:row_defaults] = row_defaults unless row_defaults.compact.empty?
